@@ -1,0 +1,61 @@
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Woops, un potin !</h1>
+    <p class="lead">Qu'est ce que nous avons la...</p>
+  </div>
+</div>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><strong>Voici le potin n° <%= @gossip.id%></strong></li>
+  </ol>
+</nav>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Créé le : <%= @gossip.created_at.strftime('%d/%m/%Y') %></li>
+  </ol>
+</nav>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">
+    <strong>Auteur : <%= @gossip.user.first_name %> <%= link_to @gossip.user.last_name, user_path(:id => @gossip.user.id), style: "text-decoration: none" %></strong><br/>
+    Titre : <%= @gossip.title %><br/>
+    Contenu : <%= @gossip.content %><br/></li>
+  </ol>
+</nav>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Habitant de : <a href="<%= city_path %>" role="button"> <%= @gossip.user.city.name %></a></li>
+  </ol>
+</nav>
+  <% if current_user.id == @gossip.user_id %>
+    <a class="btn btn-secondary " href="<%= edit_gossip_path %>" role="button">Modifier</a>
+    <a class="btn btn-outline-danger" href="<%= gossip_path(@gossip.id) %>" data-confirm="Etes-vous sûr ?" data-method="DELETE" role="button">Supprimer</a>
+  <% end %>
+<br/>
+<br/>
+  <%= form_tag(comments_path, method: 'post') do %>
+  <%= hidden_field_tag('gossip_id', params[:id] )%>
+  <%= label_tag 'Commentaire : ' %>
+  <%= text_area_tag 'content', nil %>
+  <br /> <br />
+
+  <%= submit_tag "Poster", class: "btn btn-secondary " %>
+
+
+  <% @comment.each do |comm| %>
+    <article> 
+      <h4 class="desc-title">Commentaire de <%= comm.user_id %> </h4>
+      <p class="desc"><%= comm.content %></p>
+      <div class="show-edit">
+          <%= link_to 'Modifier', edit_comment_path(comm.id), class:'btn btn-secondary', confirm: 'Êtes-vous sûr ?' %>
+          <%= link_to 'Supprimer', comment_path(comm.id), method: 'delete', class:'btn btn-outline-danger'%>
+      </div>
+    </article>
+  <% end %> 
+
+<% end %>

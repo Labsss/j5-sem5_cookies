@@ -1,0 +1,24 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Infos ville </h1>
+    <p class="lead">En savoir plus sur auteurs en ville</p>
+  </div>
+</div>
+  <p> 
+
+  La ville en question : <%= @city.name %><br/>
+
+  <% @city.users.each do |user| %>
+    <ul class="list-group">
+      <li class="list-group-item active">Utilisateur : <%= user.first_name %> <%= user.last_name %></li>
+      <% user.gossips.each do |gossip| %>
+        <li class="list-group-item"><%= gossip.title %> </li>
+        <li class="list-group-item"><%= gossip.content %> </li>
+        <% end %>
+    </ul>
+    <br/>
+  <% end %>
+
+  </p>
+
+  

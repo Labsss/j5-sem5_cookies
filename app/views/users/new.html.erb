@@ -1,0 +1,44 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">S'inscrire sur The Gossip Project ! </h1>
+    <p class="lead">Donne un email pour te joindre et un mot de passe (min 6 car.)</p>
+  </div>
+</div>
+
+<div class="form-group">
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <%= label_tag '* Ton futur Login (email) : ' %>
+  <%= text_field_tag 'email', nil, class: "form-control" %>
+  <br /> <br />
+
+  <%= label_tag ' * Mot de passe : ' %>
+  <%= text_field_tag 'password', nil, class: "form-control" %>
+  <br /> <br />
+
+  <%= label_tag '* Prénom : ' %>
+  <%= text_field_tag 'first_name', nil, class: "form-control" %>
+  <br /> <br />
+
+  <%= label_tag '* Nom : ' %>
+  <%= text_field_tag 'last_name', nil, class: "form-control" %>
+  <br /> <br />
+  
+  <%= label_tag 'Description : ' %>
+  <%= text_area_tag 'description', nil, class: "form-control" %>
+  <br /> <br />
+  
+  <%= label_tag 'Age: ' %>
+  <%= text_field_tag 'age', nil, class: "form-control" %>
+  <br /> <br />
+
+  <select class="field-tag form-item select-tag" name="city">
+  <% City.all.each do |city| %>
+  <option value="<%= city.id %>"><%= city.name %></option>
+  <% end %>
+  </select>
+
+  <%= submit_tag "Valider", class: "btn btn-secondary " %>
+
+<% end %>
+</div>

@@ -1,0 +1,20 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Editer un potin </h1>
+    <p class="lead">formulaire de modification ci-dessous</p>
+  </div>
+</div>
+
+<%= form_tag url_for(action: 'update'), method: "put" do %>
+
+  <%= label_tag 'Titre du potin : ' %>
+  <%= text_field_tag 'title', @gossip.title %>
+  <br /> <br />
+
+  <%= label_tag 'Contenu du potin : ' %>
+  <%= text_area_tag 'content', @gossip.content %>
+  <br /> <br />
+
+  <%= submit_tag "Modifier mon potin", class: "btn btn-secondary " %>
+
+<% end %>
