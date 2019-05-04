@@ -1,4 +1,4 @@
-require 'bcrypt'
+#require 'bcrypt'
 class UsersController < ApplicationController
 
   def show
@@ -20,10 +20,13 @@ class UsersController < ApplicationController
       flash[:Notice] = "Utilisateur non créé"
       render '/users/new'
      else
-
-        #@user = User.create('last_name': params[:last_name], 'first_name': params[:first_name], 'email': params[:email], 'age': params[:age], 'password_digest': BCrypt::Password.create(params[:password]), 'description': params[:description], 'city_id': params[:city].to_i)
-        #@user = User.create('email': params[:email], 'password_digest': BCrypt::Password.create(params[:password])
-        @user = User.create('last_name': params[:last_name], 'first_name': params[:first_name], 'email': params[:email], 'age': params[:age], 'password': params[:password], 'description': params[:description], 'city_id': params[:city].to_i)
+        @user = User.create('last_name': params[:last_name], 
+          'first_name': params[:first_name], 
+          'email': params[:email], 
+          'age': params[:age], 
+          'password': params[:password], 
+          'description': params[:description], 
+          'city_id': params[:city].to_i)
         puts "The user #{params[:email]}was succesfully saved !"
         flash[:success] = "Utilisateur créé !"
         log_in(@user)
@@ -32,20 +35,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
   end
 
   def update
-    # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
-    # pour info, le contenu de ce formulaire sera accessible dans le hash params
-    # Une fois la modification faite, on redirige généralement vers la méthode show (pour afficher le potin modifié)
   end
 
   def destroy
-    def destroy
-      session[:user_id] = nil
-      flash[:notice] = "Utilisateur déconnecté !"
-      redirect_to '/login'
-    end
+    session[:user_id] = nil
+    flash[:notice] = "Utilisateur déconnecté !"
+    redirect_to '/login'
   end
+  
 end

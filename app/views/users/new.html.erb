@@ -33,11 +33,11 @@
   <br /> <br />
 
   <select class="field-tag form-item select-tag" name="city">
-  <% City.all.each do |city| %>
-  <option value="<%= city.id %>"><%= city.name %></option>
-  <% end %>
+    <% City.all.each do |city| %>
+      <option value="<%= city.id %>"><%= city.name %></option>
+    <% end %>
   </select>
-
+  <br />
   <%= submit_tag "Valider", class: "btn btn-secondary " %>
 
 <% end %>
